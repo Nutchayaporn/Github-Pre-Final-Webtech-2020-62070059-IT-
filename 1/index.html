@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Kanit&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Kanit:wght@300&display=swap" rel="stylesheet">
+    <style>
+       
+        .box {
+            margin-bottom: 20px;
+        }
+
+        h5,
+        .card-text,
+        .card,
+        .container {
+            text-align: left;
+            font-family: 'Kanit', sans-serif;
+            font-size: 15px;
+
+        }
+
+        img {
+            width: 100%;
+        }
+        h1 {
+            margin: 20px;
+
+        }
+    </style>
+</head>
+
+<body>
+    
+       
+            
+                
+                
+
+                    
+
+
+               
+     
+
+
+
+
+
+    <script>
+        let requestURL = 'music.json';
+        let request = new XMLHttpRequest();
+        request.onreadystatechange = function () {
+            if (request.readyState == 4 && request.status == 200) {
+                dataReportStatus(JSON.parse(request.responseText));
+            }
+        };
+        request.open("GET", requestURL, true);
+        request.send();
+
+        function dataReportStatus(data) {
+
+            let all = "";
+            for (var i = 0; i < data.tracks.items.length; i++) {
+
+                all += '<div class="col-md-4">';
+                all += '<div class="card box">';
+                all += '<img class="card-img-top" src="' +  data.tracks.items[i].album.images[0].url  + '" alt="pic">';
+                all += '<div class="card-body">';
+                all += '<h3>'+ data.tracks.items[i].name +'</h3>';
+                all += '<h5> Artist: '  + data.tracks.items[i].artists[0].name + '</h5>';
+                all += '<h5>Release: '+ data.tracks.items[i].album.release_date +'</h5>';
+                all += ' <h5>Avaliable: '+ data.tracks.items[i].album.available_markets.length +' contries</h5>';
+                all += ' </div>';
+                all += '</div>';
+                all += '</div>';
+
+
+
+            }
+            document.getElementById("showing").innerHTML += all;
+
+
+         
+
+
+        }
+
+
+
+
+
+    </script>
+
+
+    <div class="container">
+        
+
+        <div>
+            <div class="row" id="showing"></div>
+        </div>
+
+
+    </div>
+
+
+   
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</body>
+
+</html>
